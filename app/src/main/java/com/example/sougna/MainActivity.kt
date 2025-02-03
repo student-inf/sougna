@@ -4,31 +4,35 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
+import com.example.sougna.model.Category
+import com.example.sougna.model.Product
 import com.example.sougna.ui.theme.SougnaTheme
+import com.example.sougna.viewmodel.CategoryViewModel
+import com.example.sougna.viewmodel.ProductViewModel
 
+/**
+ * Main activity for the app
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,108 +40,149 @@ class MainActivity : ComponentActivity() {
         setContent {
             SougnaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "drLacheheb",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                    //FirstUI(modifier = Modifier.padding(innerPadding))
+
+                    val productViewModel = viewModel<ProductViewModel>()
+                    val categoryViewModel = viewModel<CategoryViewModel>()
+                    MyScreen(
+                        productViewModel,
+                        categoryViewModel,
+                        modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-
-
 /**
- * Main composable function for the UI layout
- * @param modifier Modifier for layout adjustments
+ * Composable function that displays a list of categories
+ * @param categories The list of categories to display
+ * @param modifier Modifier for the layout
  */
 @Composable
-fun FirstUI(modifier: Modifier = Modifier) {
-    // TODO 1: Create state variables for text input and items list
-
-    Column(
-        modifier = modifier
-            .padding(25.dp)
-            .fillMaxSize()
-    ) {
-        SearchInputBar(
-            textValue = "", // TODO 2: Connect to state
-            onTextValueChange = { /* TODO 3: Update text state */ },
-            onAddItem = { /* TODO 4: Add item to list */ },
-            onSearch = { /* TODO 5: Implement search functionality */ }
-        )
-
-        // TODO 6: Display list of items using CardsList composable
-        CardsList(emptyList())
-    }
-}
-
-/**
- * Composable for search and input controls
- * @param textValue Current value of the input field
- * @param onTextValueChange Callback for text changes
- * @param onAddItem Callback for adding new items
- * @param onSearch Callback for performing search
- */
-@Composable
-fun SearchInputBar(
-    textValue: String,
-    onTextValueChange: (String) -> Unit,
-    onAddItem: (String) -> Unit,
-    onSearch: (String) -> Unit
+fun CategoryList(
+    categories: List<Category>,
+    modifier: Modifier = Modifier
 ) {
-    Column {
-        TextField(
-            value = textValue,
-            onValueChange = onTextValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("Enter text...") }
-        )
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Button(onClick = { /* TODO 7: Handle add button click */ }) {
-                Text("Add")
-            }
-
-            Button(onClick = { /* TODO 8: Handle search button click */ }) {
-                Text("Search")
+    LazyColumn(modifier = modifier) {
+        items(categories) { category ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Display category icon
+                Image(
+                    painter = painterResource(id = category.icon),
+                    contentDescription = null,
+                    modifier = Modifier.size(48.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                // Display category name
+                Text(text = category.name)
             }
         }
     }
 }
 
 /**
- * Composable for displaying a list of items in cards
- * @param displayedItems List of items to display
+ * Composable function that displays a list of products in card format
+ * @param products The list of products to display
+ * @param modifier Modifier for the layout
  */
 @Composable
-fun CardsList(displayedItems: List<String>) {
-    // TODO 9: Implement LazyColumn to display items
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        // TODO 10: Create cards for each item in the list
-        items(displayedItems) { item ->
+fun ProductList(
+    products: List<Product>,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(modifier = modifier) {
+        items(products) { product ->
+            // Card container for each product
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 4.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                    .padding(16.dp)
             ) {
-                Text(text = "Sample Item", modifier = Modifier.padding(16.dp))
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    // Product image
+                    AsyncImage(
+                        model = product.thumbnailUrl,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    // Product name
+                    Text(
+                        text = product.name,
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    // Product description
+                    Text(
+                        text = product.description,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    // Product price
+                    Text(
+                        text = "$${product.price}",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Main screen composable that displays both categories and products
+ * @param productViewModel ViewModel for product data
+ * @param categoryViewModel ViewModel for category data
+ * @param modifier Modifier for the layout
+ */
+@Composable
+fun MyScreen(
+    productViewModel: ProductViewModel,
+    categoryViewModel: CategoryViewModel,
+    modifier: Modifier = Modifier
+) {
+    // Collect state from ViewModels
+    val productState by productViewModel.uiState.collectAsState()
+    val categoryState by categoryViewModel.categoryState.collectAsState()
+
+    Column(modifier = modifier.padding(16.dp)) {
+        // Display category list
+        CategoryList(
+            categories = categoryState.categories,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Handle product state
+        when {
+            productState.isLoading -> {
+                // Show loading indicator
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            }
+            productState.error != null -> {
+                // Show error message
+                Text(
+                    text = "Error: ${productState.error}",
+                    color = Color.Red,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+            }
+            else -> {
+                // Display product list
+                ProductList(
+                    products = productState.products,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     }
