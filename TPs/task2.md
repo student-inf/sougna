@@ -37,10 +37,7 @@ Your task is to implement the first UI in `MainActivity` based on the design pro
 
 ## FirstUI
 
-- ![FIrstUI.jpg](TPs/FIrstUI.jpg)
+![First UI](FIrstUI.jpg)
 
-## Resources
-
-- [FIrstUI.jpg](TPs/FIrstUI.jpg)
 
 Good luck!
