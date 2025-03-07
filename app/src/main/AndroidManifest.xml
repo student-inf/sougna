@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sougna">
 
 
 <!-- Allows the app to access the internet, required for network operations like loading images from URLs -->
     <uses-permission android:name="android.permission.INTERNET" />
+=======
+    xmlns:tools="http://schemas.android.com/tools">
+>>>>>>> 0d2f0b7 (Initial commit)
 
     <application
         android:allowBackup="true"
@@ -15,13 +19,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/Theme.Sougna"
+=======
+        android:theme="@style/Theme.Sogna"
+>>>>>>> 0d2f0b7 (Initial commit)
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+<<<<<<< HEAD
             android:theme="@style/Theme.Sougna">
+=======
+            android:theme="@style/Theme.Sogna">
+>>>>>>> 0d2f0b7 (Initial commit)
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

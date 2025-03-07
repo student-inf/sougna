@@ -5,11 +5,19 @@ plugins {
 }
 
 android {
+<<<<<<< HEAD
     namespace = "com.example.sougna"
     compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.sougna"
+=======
+    namespace = "com.example.sogna"
+    compileSdk = 35
+
+    defaultConfig {
+        applicationId = "com.example.sogna"
+>>>>>>> 0d2f0b7 (Initial commit)
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -43,6 +51,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+<<<<<<< HEAD
     // ViewModel Kotlin extensions for easier ViewModel usage
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // Compose integration for ViewModel to use ViewModel in composable functions
@@ -51,6 +60,9 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     // Coil image loading library for Compose to load and display images efficiently
     implementation(libs.io.coil.kt.compose)
+=======
+    implementation(libs.androidx.activity.compose)
+>>>>>>> 0d2f0b7 (Initial commit)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
