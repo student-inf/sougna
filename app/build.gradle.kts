@@ -5,74 +5,74 @@ plugins {
 }
 
 android {
-<<<<<<< HEAD
+
     namespace = "com.example.sougna"
     compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.sougna"
-=======
-    namespace = "com.example.sogna"
-    compileSdk = 35
+        namespace = "com.example.sogna"
+        compileSdk = 35
 
-    defaultConfig {
-        applicationId = "com.example.sogna"
->>>>>>> 0d2f0b7 (Initial commit)
-        minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        defaultConfig {
+            applicationId = "com.example.sogna"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+            minSdk = 24
+            targetSdk = 35
+            versionCode = 1
+            versionName = "1.0"
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+
+        buildTypes {
+            release {
+                isMinifyEnabled = false
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            }
+        }
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_11
+            targetCompatibility = JavaVersion.VERSION_11
+        }
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+        buildFeatures {
+            compose = true
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
-    }
-}
 
-dependencies {
+    dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-<<<<<<< HEAD
-    // ViewModel Kotlin extensions for easier ViewModel usage
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    // Compose integration for ViewModel to use ViewModel in composable functions
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    // Compose integration with Activity for setting up Compose UI in Activities
-    implementation(libs.androidx.activity.compose)
-    // Coil image loading library for Compose to load and display images efficiently
-    implementation(libs.io.coil.kt.compose)
-=======
-    implementation(libs.androidx.activity.compose)
->>>>>>> 0d2f0b7 (Initial commit)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+        implementation(libs.androidx.core.ktx)
+        implementation(libs.androidx.lifecycle.runtime.ktx)
+
+        // ViewModel Kotlin extensions for easier ViewModel usage
+        implementation(libs.androidx.lifecycle.viewmodel.ktx)
+        // Compose integration for ViewModel to use ViewModel in composable functions
+        implementation(libs.androidx.lifecycle.viewmodel.compose)
+        // Compose integration with Activity for setting up Compose UI in Activities
+        implementation(libs.androidx.activity.compose)
+        // Coil image loading library for Compose to load and display images efficiently
+        implementation(libs.io.coil.kt.compose)
+
+        implementation(libs.androidx.activity.compose)
+
+        implementation(platform(libs.androidx.compose.bom))
+        implementation(libs.androidx.ui)
+        implementation(libs.androidx.ui.graphics)
+        implementation(libs.androidx.ui.tooling.preview)
+        implementation(libs.androidx.material3)
+        testImplementation(libs.junit)
+        androidTestImplementation(libs.androidx.junit)
+        androidTestImplementation(libs.androidx.espresso.core)
+        androidTestImplementation(platform(libs.androidx.compose.bom))
+        androidTestImplementation(libs.androidx.ui.test.junit4)
+        debugImplementation(libs.androidx.ui.tooling)
+        debugImplementation(libs.androidx.ui.test.manifest)
+    }
 }

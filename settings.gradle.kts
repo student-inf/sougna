@@ -19,10 +19,8 @@ dependencyResolutionManagement {
     }
 }
 
-<<<<<<< HEAD
-rootProject.name = "Sougna"
-=======
+
 rootProject.name = "sogna"
->>>>>>> 0d2f0b7 (Initial commit)
+
 include(":app")
  
